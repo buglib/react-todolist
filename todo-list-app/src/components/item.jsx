@@ -6,8 +6,8 @@ export default class Item extends Component {
     return (
       <li>
         <label>
-          <input type="checkbox" />
-          <span>task</span>
+          <input type="checkbox" defaultChecked={this.props.done} />
+          <span>{this.props.taskInfo}</span>
         </label>
         <button>删除</button>
       </li>
