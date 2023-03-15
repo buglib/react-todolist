@@ -12,18 +12,17 @@ export default class App extends Component {
   }
 
   render() {
-    const tasks = this.state.tasks
     return (
       <div className="todolist-container">
         <div className="todolist-wrap">
           <Header addTask={this.addTask} />
-          <List tasks={tasks} />
+          <List tasks={this.state.tasks} />
         </div>
       </div>
     )
   }
 
-  addTask(taskInfo, done) {
+  addTask = (taskInfo, done) => {
     const oldTasks = this.state.tasks
     const id = this.state.tasks.length
     const newTasks = [{id, taskInfo, done}, ...oldTasks]
