@@ -22,4 +22,13 @@ export default class App extends Component {
       </div>
     )
   }
+
+  addTask(taskInfo, done) {
+    const oldTasks = this.state.tasks
+    const id = this.state.tasks.length
+    const newTasks = [{id, taskInfo, done}, ...oldTasks]
+    this.setState({
+      tasks: newTasks
+    })
+  }
 }
