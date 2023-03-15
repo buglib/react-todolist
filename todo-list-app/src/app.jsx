@@ -16,7 +16,11 @@ export default class App extends Component {
       <div className="todolist-container">
         <div className="todolist-wrap">
           <Header addTask={this.addTask} />
-          <List tasks={this.state.tasks} removeTask={this.removeTask} />
+          <List 
+            tasks={this.state.tasks} 
+            removeTask={this.removeTask} 
+            updateTask={this.updateTask}
+          />
         </div>
       </div>
     )
@@ -34,6 +38,20 @@ export default class App extends Component {
   removeTask = (id) => {
     const oldTasks = this.state.tasks
     const newTasks = oldTasks.splice(id, 1)
+    this.setState({
+      tasks: newTasks
+    })
+  }
+
+  updateTask = (id, done) => {
+    const oldTasks = this.state.tasks
+    const newTasks = oldTasks.map((task) => {
+      if (task.id === id) {
+        return {...task, done: done}
+      } else {
+        return task
+      }
+    })
     this.setState({
       tasks: newTasks
     })

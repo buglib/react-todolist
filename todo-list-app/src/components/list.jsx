@@ -23,7 +23,8 @@ export default class List extends Component {
         id={task.id} 
         taskInfo={task.taskInfo} 
         done={task.done} 
-        removeTask={this.props.removeTask}
+        removeTask={this.props.removeTask} 
+        updateTask={this.props.updateTask}
       />
     )
   }
