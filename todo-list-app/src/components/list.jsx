@@ -17,6 +17,14 @@ export default class List extends Component {
   }
 
   renderItem(task) {
-    return <Item key={task.id} id={task.id} taskInfo={task.taskInfo} done={task.done} />
+    return (
+      <Item 
+        key={task.id} 
+        id={task.id} 
+        taskInfo={task.taskInfo} 
+        done={task.done} 
+        removeTask={this.props.removeTask}
+      />
+    )
   }
 }
