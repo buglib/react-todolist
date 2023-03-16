@@ -2,26 +2,31 @@ import React from "react"
 import { Component } from "react"
 import Header from "./components/header"
 import List from "./components/list"
+import Footer from "./components/footer"
 
 export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       inc: 0,
-      tasks: []
+      tasks: [],
+      currentView: "all" // all tasks, done tasks and todo tasks
     }
   }
 
   render() {
+    // console.log("render " + this.state.currentView + " view")
     return (
       <div className="todolist-container">
         <div className="todolist-wrap">
           <Header addTask={this.addTask} />
           <List 
-            tasks={this.state.tasks} 
+            currentView={this.state.currentView} 
+            listTasks={this.listTasks} 
             removeTask={this.removeTask} 
             updateTask={this.updateTask}
           />
+          <Footer switchView={this.switchView} />
         </div>
       </div>
     )
@@ -59,5 +64,32 @@ export default class App extends Component {
     this.setState({
       tasks: newTasks
     })
+  }
+
+  listTasks = (view) => {
+    // console.log("change view")
+    // const view = this.state.currentView
+    const tasks = this.state.tasks.slice()
+    if (view === "all") {
+      return tasks
+    }
+    if (view === "done") {
+      return tasks.filter((task) => {
+        return task.done === true
+      })
+    }
+    if (view === "todo") {
+      return tasks.filter((task) => {
+        return task.done === false
+      })
+    }
+  }
+
+  switchView = (view) => {
+    if (view === "all" || view === "done" || view === "todo") {
+      this.setState({
+        currentView: view
+      })
+    }
   }
 }

@@ -4,7 +4,7 @@ import Item from "./item"
 
 export default class List extends Component {
   render() {
-    const tasks = this.props.tasks
+    const tasks = this.props.listTasks(this.props.currentView)
     return (
       <div className="todolist-body">
         <ul className="todolist-main">
