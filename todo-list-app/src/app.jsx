@@ -81,6 +81,7 @@ export default class App extends Component {
     const newTasks = oldTasks.filter((task) => {
       return task.id !== id
     })
+    this.deleteTodoItem(id)
     this.setState({
       tasks: newTasks
     })
@@ -145,6 +146,22 @@ export default class App extends Component {
     client.put(
       "/v1/todolist/" + task.id,
       task
+    ).then((resp) => {
+      if (resp.status !== 200) {
+        this.setState({
+          error: resp.data.message
+        })
+      }
+    }).catch((error) => {
+      this.setState({
+        error: error
+      })
+    })
+  }
+
+  deleteTodoItem(id) {
+    client.delete(
+      "/v1/todolist/" + id
     ).then((resp) => {
       if (resp.status !== 200) {
         this.setState({
