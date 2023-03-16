@@ -7,6 +7,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      inc: 0,
       tasks: []
     }
   }
@@ -28,16 +29,19 @@ export default class App extends Component {
 
   addTask = (taskInfo, done) => {
     const oldTasks = this.state.tasks
-    const id = this.state.tasks.length
+    const id = this.state.inc
     const newTasks = [{id, taskInfo, done}, ...oldTasks]
     this.setState({
+      inc: id + 1,
       tasks: newTasks
     })
   }
 
   removeTask = (id) => {
-    const oldTasks = this.state.tasks
-    const newTasks = oldTasks.splice(id, 1)
+    const oldTasks = this.state.tasks.slice()
+    const newTasks = oldTasks.filter((task) => {
+      return task.id !== id
+    })
     this.setState({
       tasks: newTasks
     })
