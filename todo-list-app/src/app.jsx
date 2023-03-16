@@ -90,7 +90,9 @@ export default class App extends Component {
     const oldTasks = this.state.tasks
     const newTasks = oldTasks.map((task) => {
       if (task.id === id) {
-        return {...task, done: done}
+        task.done = done
+        this.putTodoItem(task)
+        return task
       } else {
         return task
       }
@@ -125,6 +127,23 @@ export default class App extends Component {
   postTodolist(task) {
     client.post(
       "/v1/todolist",
+      task
+    ).then((resp) => {
+      if (resp.status !== 200) {
+        this.setState({
+          error: resp.data.message
+        })
+      }
+    }).catch((error) => {
+      this.setState({
+        error: error
+      })
+    })
+  }
+
+  putTodoItem(task) {
+    client.put(
+      "/v1/todolist/" + task.id,
       task
     ).then((resp) => {
       if (resp.status !== 200) {
