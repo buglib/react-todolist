@@ -25,16 +25,16 @@ export default class App extends Component {
     if (!error) {
       return (
         <div className="todolist-container">
-          <div className="todolist-wrap">
-            <Header addTask={this.addTask} />
-            <List 
-              currentView={this.state.currentView} 
-              listTasks={this.listTasks} 
-              removeTask={this.removeTask} 
-              updateTask={this.updateTask}
-            />
-            <Footer switchView={this.switchView} />
-          </div>
+          {/* <div className="todolist-wrap"> */}
+          <Header addTask={this.addTask} />
+          <List 
+            currentView={this.state.currentView} 
+            listTasks={this.listTasks} 
+            removeTask={this.removeTask} 
+            updateTask={this.updateTask}
+          />
+          <Footer switchView={this.switchView} />
+          {/* </div> */}
         </div>
       )
     } else {

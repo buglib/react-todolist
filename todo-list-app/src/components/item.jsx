@@ -4,7 +4,7 @@ import { Component } from "react"
 export default class Item extends Component {
   render() {
     return (
-      <li>
+      <li className="todolist-item">
         <label>
           <input 
             type="checkbox" 
