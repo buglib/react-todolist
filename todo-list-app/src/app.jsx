@@ -60,7 +60,7 @@ export default class App extends Component {
     }
     if (view === "todo") {
       return tasks.filter((task) => {
-        return task.done === false
+        return task.done !== true
       })
     }
   }

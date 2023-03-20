@@ -5,22 +5,59 @@ export default class Footer extends Component {
   render() {
     return (
       <div className="todolist-footer">
-        <button onClick={this.handleClickAll}>全部任务</button>
-        <button onClick={this.handleClickDone}>已完成任务</button>
-        <button onClick={this.handleClickTodo}>待办任务</button>
+        <label>
+          <input 
+            type="radio"
+            name="view" 
+            value="all" 
+            // defaultChecked={true}
+            onChange={this.handleChange("all")}
+          />
+          <span>全部任务</span>
+        </label>
+
+        <label>
+          <input 
+            type="radio"
+            name="view" 
+            value="done" 
+            // defaultChecked={false}
+            onChange={this.handleChange("done")}
+          />
+          <span>已完成任务</span>
+        </label>
+
+        <label>
+          <input 
+            type="radio"
+            name="view" 
+            value="todo" 
+            // defaultChecked={false}
+            onChange={this.handleChange("todo")}
+          />
+          <span>未完成任务</span>
+        </label>
       </div>
     )
   }
 
-  handleClickAll = () => {
-    this.props.switchView("all")
+  handleChange = (view) => {
+    return (event) => {
+      if (event.target.checked) {
+        this.props.switchView(view)
+      }
+    }
   }
 
-  handleClickDone = () => {
-    this.props.switchView("done")
-  }
+  // handleClickAll = () => {
+  //   this.props.switchView("all")
+  // }
 
-  handleClickTodo = () => {
-    this.props.switchView("todo")
-  }
+  // handleClickDone = () => {
+  //   this.props.switchView("done")
+  // }
+
+  // handleClickTodo = () => {
+  //   this.props.switchView("todo")
+  // }
 }
