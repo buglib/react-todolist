@@ -70,10 +70,11 @@ export default class App extends Component {
     const oldTasks = this.state.tasks
     // const id = this.state.inc
     const task = {taskInfo, done}
-    const newTasks = [task, ...oldTasks]
-    this.postTodolist(task)
-    this.setState({
-      tasks: newTasks
+    this.postTodolist(task).then((id) => {
+      task.id = id
+      // console.log("task id is: ", task.id)
+      const newTasks = [task, ...oldTasks]
+      this.setState({tasks: newTasks})
     })
   }
 
@@ -127,8 +128,8 @@ export default class App extends Component {
       })
   }
 
-  postTodolist(task) {
-    client.post(
+  async postTodolist(task) {
+    var promise = client.post(
       "/v1/todolist",
       task
     ).then((resp) => {
@@ -136,12 +137,16 @@ export default class App extends Component {
         this.setState({
           error: resp.data.message
         })
+      } else {
+        return resp.data.data.id
       }
     }).catch((error) => {
       this.setState({
         error: error
       })
+      return -1
     })
+    return promise
   }
 
   putTodoItem(task) {
