@@ -1,4 +1,3 @@
-import React from "react"
 import axios from "axios"
 import { Component } from "react"
 import Header from "./components/header"
@@ -17,6 +16,8 @@ export default class App extends Component {
       currentView: "all", // all tasks, done tasks and todo tasks
       error: null
     }
+    // 首次加载时，从服务端获取所有的任务
+    this.getTodolist()
   }
 
   render() {
@@ -44,10 +45,10 @@ export default class App extends Component {
   }
 
   listTasks = (view) => {
-    // 先从后端获取所有任务
-    if (this.state.tasks.length === 0) {
-      this.getTodolist()
-    }
+    // // 先从后端获取所有任务
+    // if (this.state.tasks.length === 0) {
+    //   this.getTodolist()
+    // }
     // 然后根据当前视图类型展示对应的任务列表
     const tasks = this.state.tasks.slice()
     if (view === "all") {
@@ -112,6 +113,7 @@ export default class App extends Component {
   }
 
   getTodolist() {
+    console.log("get all tasks from sever side")
     client.get("/v1/todolist")
       .then((resp) => {
         this.setState({
@@ -160,6 +162,7 @@ export default class App extends Component {
   }
 
   deleteTodoItem(id) {
+    // todo: id使用前需要判空
     client.delete(
       "/v1/todolist/" + id
     ).then((resp) => {

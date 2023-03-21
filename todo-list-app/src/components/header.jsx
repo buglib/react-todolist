@@ -12,7 +12,15 @@ export default class Header extends Component {
   }
 
   handleClick() {
-    const taskInfo = document.getElementById("input-task").value
-    this.props.addTask(taskInfo, false)
+    // todo: 输入框内容需要判空，而且点击添加按钮之后需要清空输入框
+    const inputElem = document.getElementById("input-task")
+    const taskInfo = inputElem.value
+    if (taskInfo !== null && taskInfo !== undefined) {
+      const taskInfoTrimed = taskInfo.trim()
+      if (taskInfoTrimed !== "") {
+        this.props.addTask(taskInfoTrimed, false)
+        inputElem.value = ""
+      }
+    }
   }
 }
