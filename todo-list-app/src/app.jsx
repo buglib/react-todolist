@@ -5,7 +5,8 @@ import List from "./components/list"
 import Footer from "./components/footer"
 
 const client = axios.create({
-  baseURL: "http://localhost:8080"
+  // baseURL: "http://localhost:8080"
+  baseURL: process.env.REACT_APP_BASE_URL
 })
 
 export default class App extends Component {
