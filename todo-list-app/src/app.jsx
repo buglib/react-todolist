@@ -4,9 +4,13 @@ import Header from "./components/header"
 import List from "./components/list"
 import Footer from "./components/footer"
 
+const host = window.location.hostname
+const port = window.location.port
+const baseUrl = "http://" + host + ":" + port
+console.log(baseUrl)
 const client = axios.create({
   // baseURL: "http://localhost:8080"
-  baseURL: process.env.REACT_APP_BASE_URL
+  baseURL: baseUrl
 })
 
 export default class App extends Component {
